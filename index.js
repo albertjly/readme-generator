@@ -9,7 +9,7 @@ const questions = [
     {
         type: 'input',
         name: 'title',
-        message: 'What is the project/repo name?',
+        message: 'What is the name of the project/repo?',
         validate: input => !!input
     },
     {
@@ -21,20 +21,30 @@ const questions = [
     {
         type: 'input',
         name: 'installation',
-        message: 'What are the steps required to install your project?',
+        message: 'What are the steps required to install?',
         default: 'npm install',
         validate: input => !!input
     },
     {
-        type: 'input',
+        type: 'checkbox',
         name: 'usage',
-        message: 'Provide instructions and examples for use.',
-        validate: input => !!input
+        message: 'Please list some technologies that are used:',
+        choices: [
+            'Node',
+            'Express',
+            'Inquirer',
+            'SQL',
+            'Sequelize',
+            'dotenv',
+            'React',
+            'Angular',
+            'Vue'
+        ]
     },
     {
         type: 'input',
-        name: 'credits',
-        message: 'Please list your collaborators',
+        name: 'demo_url',
+        message: 'Please input the demo url:',
         validate: input => !!input
     },
     {
@@ -71,6 +81,7 @@ const dir = './description';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
+
 const filePath = path.join(__dirname, `${dir}/README.md`);
 // TODO: Create a function to write README file
 function writeToFile(data) {
@@ -85,8 +96,6 @@ function init() {
     inquirer
     .prompt(questions)
     .then(data => {
-        // console.log(data);
-        // console.log(generateMarkdown(data));
         writeToFile(generateMarkdown(data));
     }).catch(err => {
         console.error(err);

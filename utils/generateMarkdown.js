@@ -55,16 +55,23 @@ function renderLicenseSection(license) {
   return section;
 }
 
+function nextLine(dataArr) {
+  return dataArr.map((data)=>`- ${data}`).join('\n');
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# **${data.title}**\n
+
 >## **_Description_**\n
 ${data.description}\n
+
 ---
 ### **_Table of Contents_**\n
 * [Installation](#installation)
 * [Usage](#usage)
-* [Credits](#credits)
+* [Screen Shots](#Screen-shots)
+* [Demo](#demo)
 * [Features](#features)
 * [Contribution](#contribution)
 * [License](#license)
@@ -74,25 +81,35 @@ ${data.description}\n
 ${data.installation}
 \`\`\`\n
 
-
 >## **_Usage_**\n
-${data.usage}\n
-Provide instructions and examples for use.\n
-**Wider Screen**\n
-![screenshot](./assets/images/screenshot.png)\n
-**Mobile Screen**\n
-![screenshot](./assets/images/mobile-screenshot.png)\n
+Here are some technologies used in the project.\n
+${nextLine(data.usage)}\n
 
->## **_Credits_**\n
-${data.credits}\n
+>## **_Screen-shots_**
+**\`Wider Screen\`**\n
+<img src="./images/screenshot.png" width="1000">\n
+**\`Mobile Screen\`**\n
+<img src="./images/screenshot-mobile.png" height="300">\n
+
+>## **_Demo_**\n
+${data.demo_url}\n
 
 >## **_Features_**\n
 ${data.features}\n
+- Feature Alpha
+  - detail 1
+  - detail 2
+- Feature Beta
+  - detail 3
+  - detail 4
 
 >## **_Contributing_**\n
-If you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own.\n
-❤️\n
 ${data.contribution}\n
+
+❤️\n
+
+If you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own.\n
+
 
 >## **_License_**\n
 ${renderLicenseBadge(data.license)}\n
